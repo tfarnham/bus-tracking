@@ -14,10 +14,9 @@ const busStops = [
   [-71.118625, 42.374863],
 ];
 
-// TODO: add your own access token
 mapboxgl.accessToken = 'pk.eyJ1IjoidGZhcm5oYW0iLCJhIjoiY2w0OWdmbTliMTIzdTNjbXduYmlpd3IyMSJ9.NERm-b1iEu02ww45eLrYbw';
 
-// This is the map instance
+// Create a map instance
 let map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v11',
@@ -25,14 +24,12 @@ let map = new mapboxgl.Map({
   zoom: 14,
 });
 
+// Create a holder for all of the stop markers
 var allStopMarkers = [];
-// TODO: add a marker to the map at the first coordinates in the array busStops. The marker variable should be named "marker"
 
-
-// counter here represents the index of the current bus stop
-let counter = 0;
 function move() {
   if (allStopMarkers.length == 0){
+    // if blank, SHOW all of the stops between MIT and Harvard
   for (let i =0; i < busStops.length; i ++){
   var marker = new mapboxgl.Marker()
   .setLngLat(busStops[i])
@@ -41,6 +38,7 @@ function move() {
   }
 }
 else {
+  // if markers are shown, HIDE them
   for (let i =0; i < allStopMarkers.length; i ++){
     allStopMarkers[i].remove();
 }
@@ -90,7 +88,17 @@ async function run(){
     setTimeout(run, 15000);
 }
 
+
+// Request bus data from MBTA
+async function getBusLocations(){
+    const url = 'https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip';
+    const response = await fetch(url);
+    const json     = await response.json();
+    return json.data;
+}
+
 function formatPopup(direction, availabilty){
+  // Format the Popup Text (showing direction and occupancy status)
   let dirText = "Unknown";
   if (direction == 0 ){
      dirText = "North";
@@ -100,12 +108,6 @@ function formatPopup(direction, availabilty){
   }
   return "Heading: <b>" + dirText + "</b><br>" + availabilty;
 }
-// Request bus data from MBTA
-async function getBusLocations(){
-    const url = 'https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip';
-    const response = await fetch(url);
-    const json     = await response.json();
-    return json.data;
-}
 
+// Initial the program
 run();
