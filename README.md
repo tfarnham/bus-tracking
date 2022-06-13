@@ -1,6 +1,8 @@
 # Real Time Bus Tracker
 Tracking of MBTA 1 Busses between MIT and Harvard
 
+![Screenshot of map](demo.png)
+
 ## Description of the project
 Pulls GPS locations for Route 1 busses from the Massachusetts Bay Transportation Authority (MBTA). Busses are color-coded depending on direction, with <span style="color:blue">blue busses headed South</span> and <span style="color:red">red busses headed North</span>. Occupancy status (how full the bus is) is available by clicking the marker.
 
