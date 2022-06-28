@@ -12,9 +12,13 @@ Bus locations are automatically updated every 15 seconds.
 Download all files then open index.html in your browser
 
 ## Roadmap of future improvements
-Occupancy status can be shown via changing the opacity of the marker
+Nice next steps include: 
 
-Showing "time until the next bus arrives" for each of the bus stops
+- Showing occupancy status by changing the opacity of the marker
+
+- Showing "time until the next bus arrives" for each of the bus stops
+
+- Notifying the user when there are no busses
 
 ## License
 
